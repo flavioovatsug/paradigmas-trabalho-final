@@ -1,74 +1,61 @@
-"""API HTTP do Sudoku.
+"""API HTTP das N-Rainhas. Só recebe JSON, chama o Prolog e devolve JSON.
 
-Esta camada é só "cola": recebe JSON, valida o formato com Pydantic, chama o
-Prolog (via app/prolog.py) e devolve JSON. Nenhuma regra do jogo mora aqui.
-
-Rodar em modo de desenvolvimento (recarrega ao salvar):
-    uv run fastapi dev app/main.py
-
-Documentação interativa gerada automaticamente: http://localhost:8000/docs
+Rodar: uv run fastapi dev app/main.py  (documentação em /docs)
 """
 
-from typing import Annotated, Literal
+from typing import Annotated
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
 from app import prolog
 
-app = FastAPI(title="Sudoku (Prolog + Elm)")
+app = FastAPI(title="N-Rainhas (Prolog + Elm)")
 
-# Uma linha tem exatamente 9 inteiros de 0 a 9; um tabuleiro tem 9 linhas.
-# O Pydantic rejeita automaticamente (erro 422) qualquer coisa fora disso.
-Cell = Annotated[int, Field(ge=0, le=9)]
-Row = Annotated[list[Cell], Field(min_length=9, max_length=9)]
-Grid = Annotated[list[Row], Field(min_length=9, max_length=9)]
+# Tabuleiro de 4 a 8 linhas; cada número é a coluna da rainha (1..8) ou 0.
+Casa = Annotated[int, Field(ge=0, le=8)]
+Tabuleiro = Annotated[list[Casa], Field(min_length=4, max_length=8)]
 
-
-class GenerateRequest(BaseModel):
-    difficulty: Literal["easy", "medium", "hard"] = "medium"
+SEM_SOLUCAO = "Essas rainhas não levam a nenhuma solução. Tire alguma."
+COMPLETO = "O tabuleiro já está completo."
 
 
-class BoardRequest(BaseModel):
-    board: Grid
+class TabuleiroRequest(BaseModel):
+    tabuleiro: Tabuleiro
 
 
-class BoardResponse(BaseModel):
-    board: Grid
+class TabuleiroResponse(BaseModel):
+    tabuleiro: Tabuleiro
 
 
-class HintResponse(BaseModel):
-    row: int
-    col: int
-    value: int
+class DicaResponse(BaseModel):
+    linha: int
+    coluna: int
 
 
-# Mensagens que o Elm mostra na tela quando a resposta é 422.
-NO_SOLUTION = "Este tabuleiro não tem solução. Confira os números preenchidos."
-BOARD_COMPLETE = "O tabuleiro já está completo."
+class ContagemResponse(BaseModel):
+    total: int
 
 
-@app.post("/api/generate")
-def generate(request: GenerateRequest) -> BoardResponse:
-    return BoardResponse(board=prolog.generate(request.difficulty))
-
-
-@app.post("/api/solve")
-def solve(request: BoardRequest) -> BoardResponse:
+@app.post("/api/resolver")
+def resolver(req: TabuleiroRequest) -> TabuleiroResponse:
     try:
-        return BoardResponse(board=prolog.solve(request.board))
-    except prolog.NoSolution:
-        # `from None` diz que a HTTPException SUBSTITUI a exceção original,
-        # em vez de ser "causada" por ela; o traceback fica mais limpo.
-        raise HTTPException(status_code=422, detail=NO_SOLUTION) from None
+        return TabuleiroResponse(tabuleiro=prolog.resolver(req.tabuleiro))
+    except prolog.SemSolucao:
+        raise HTTPException(status_code=422, detail=SEM_SOLUCAO) from None
 
 
-@app.post("/api/hint")
-def hint(request: BoardRequest) -> HintResponse:
+@app.post("/api/dica")
+def dica(req: TabuleiroRequest) -> DicaResponse:
     try:
-        row, col, value = prolog.hint(request.board)
-    except prolog.NoSolution:
-        raise HTTPException(status_code=422, detail=NO_SOLUTION) from None
-    except prolog.BoardComplete:
-        raise HTTPException(status_code=422, detail=BOARD_COMPLETE) from None
-    return HintResponse(row=row, col=col, value=value)
+        linha, coluna = prolog.dica(req.tabuleiro)
+    except prolog.SemSolucao:
+        raise HTTPException(status_code=422, detail=SEM_SOLUCAO) from None
+    except prolog.Completo:
+        raise HTTPException(status_code=422, detail=COMPLETO) from None
+    return DicaResponse(linha=linha, coluna=coluna)
+
+
+@app.post("/api/contar")
+def contar(req: TabuleiroRequest) -> ContagemResponse:
+    return ContagemResponse(total=prolog.contar(req.tabuleiro))
