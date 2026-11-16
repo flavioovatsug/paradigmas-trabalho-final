@@ -125,6 +125,9 @@ type Tabuleiro
 type alias Model =
     { tabuleiro : Tabuleiro
     , status : Status
+    , mostrarAmeacas : Bool
+    , ultimaDica : Maybe ( Int, Int )
+    , mostrarAjuda : Bool
     }
 
 type Status
@@ -136,6 +139,9 @@ type Status
 type Msg
     = Clicou Int Int
     | MudouTamanho Int
+    | AlternouAmeacas
+    | AbriuAjuda
+    | FechouAjuda
     | Limpou
     | PediuDica
     | PediuSolucao
@@ -145,28 +151,28 @@ type Msg
     | RecebeuContagem (Result String Int)
 ```
 
-- `Tabuleiro` (`frontend/src/Rainhas.elm:26`) guarda um `Maybe Int` por
+- `Tabuleiro` (`frontend/src/Rainhas.elm:29`) guarda um `Maybe Int` por
   linha: `Nothing` é linha vazia, `Just coluna` é a rainha. Com isso é
   impossível representar duas rainhas na mesma linha, e o tipo é opaco: fora
   do módulo só se mexe nele pelas funções exportadas.
-- `Status` (`frontend/src/Main.elm:37`) é um custom type em vez de
+- `Status` (`frontend/src/Main.elm:69`) é um custom type em vez de
   `carregando : Bool` mais `erro : Maybe String`: só um estado vale por vez,
   e não existe "carregando e com erro" ao mesmo tempo.
 - A vitória não é guardada no modelo: é calculada do tabuleiro por
-  `Rainhas.venceu` (`frontend/src/Rainhas.elm:103`), então nunca fica
+  `Rainhas.venceu` (`frontend/src/Rainhas.elm:126`), então nunca fica
   desatualizada.
 - As respostas do servidor chegam como `Result String a`, e o `case` em
-  `update` (`frontend/src/Main.elm:67`) obriga a tratar `Ok` e `Err`.
+  `update` (`frontend/src/Main.elm:105`) obriga a tratar `Ok` e `Err`.
 
 ### 6.2 Conceitos do paradigma funcional utilizados
 
 - [x] Arquitetura Elm (Model, update, view): `frontend/src/Main.elm`
-- [x] Custom types e `case` exaustivo: `Status` e `Msg` em `frontend/src/Main.elm:37-63`
-- [x] `Maybe` e `Result` no lugar de null e exceções: `rainhaEm` (`frontend/src/Rainhas.elm:42`) e as mensagens `Recebeu...`
+- [x] Custom types e `case` exaustivo: `Status` e `Msg` em `frontend/src/Main.elm:69-103`
+- [x] `Maybe` e `Result` no lugar de null e exceções: `rainhaEm` (`frontend/src/Rainhas.elm:45`) e as mensagens `Recebeu...`
 - [x] Funções de ordem superior e aplicação parcial: `Api.resolver = post "/api/resolver" decoder` (`frontend/src/Api.elm:14-33`)
-- [x] Composição (`|>`, `>>`): `paraLista` (`frontend/src/Rainhas.elm:123`) e `rainhaEm`
+- [x] Composição (`|>`, `>>`): `paraLista` (`frontend/src/Rainhas.elm:144`) e `rainhaEm`
 - [x] Decoders e encoders JSON: `frontend/src/Api.elm:21-48`
-- [x] Comandos e subscriptions (efeitos controlados): as requisições são `Cmd Msg` devolvidos pelo `update`
+- [x] Comandos e subscriptions (efeitos controlados): as requisições e o aviso de ajuda (`port`) são `Cmd Msg` devolvidos pelo `update`, e o atalho `Escape` do modal usa `Browser.Events.onKeyDown` em `subscriptions` (`frontend/src/Main.elm:34`)
 - [x] Imutabilidade e atualização de records: `{ model | tabuleiro = ... }` em `update`
 - [x] Outro: tipo opaco `Tabuleiro`, separando o domínio puro (`Rainhas.elm`) de HTTP (`Api.elm`) e da tela (`Main.elm`)
 
@@ -199,7 +205,7 @@ hora, sem ir ao servidor.
 
 O tabuleiro é uma lista com a coluna (1..N) da rainha de cada linha, ou 0.
 O Elm converte para `Maybe Int` com colunas a partir de 0 em
-`frontend/src/Rainhas.elm:121`.
+`frontend/src/Rainhas.elm:144`.
 
 ## 8. Testes e validação
 

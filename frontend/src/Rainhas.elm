@@ -4,9 +4,12 @@ module Rainhas exposing
     , colocar
     , deLista
     , emConflito
+    , estaAtacada
     , paraLista
     , rainhaEm
     , tamanho
+    , totalConflitos
+    , totalRainhas
     , vazio
     , venceu
     )
@@ -98,6 +101,26 @@ emConflito linha tabuleiro =
 
         Just coluna ->
             List.any (ataca ( linha, coluna )) (rainhas tabuleiro)
+
+
+{-| A casa `(linha, coluna)` está na linha de ataque de alguma rainha de outra
+linha? Útil para mostrar visualmente as casas ameaçadas no tabuleiro.
+-}
+estaAtacada : ( Int, Int ) -> Tabuleiro -> Bool
+estaAtacada posicao tabuleiro =
+    List.any (ataca posicao) (rainhas tabuleiro)
+
+
+totalRainhas : Tabuleiro -> Int
+totalRainhas tabuleiro =
+    List.length (rainhas tabuleiro)
+
+
+totalConflitos : Tabuleiro -> Int
+totalConflitos tabuleiro =
+    rainhas tabuleiro
+        |> List.filter (\( linha, _ ) -> emConflito linha tabuleiro)
+        |> List.length
 
 
 venceu : Tabuleiro -> Bool
