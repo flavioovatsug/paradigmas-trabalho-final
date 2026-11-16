@@ -4,14 +4,14 @@
 
 | Nome completo | Matrícula | Turma (14h/16h) | Usuário GitHub |
 |---------------|-----------|-----------------|----------------|
-| Flávio Melo   | 211030602 | 16h             | [@flavioovatsug](https://github.com/flavioovatsug) |
+| Flávio Melo   | 211030602 | 16h             | https://github.com/flavioovatsug |
 | [Nome]        | [000000]  | [16h]           | [@usuario]     |
 | [Nome]        | [000000]  | [14h]           | [@usuario]     |
 
 - **Nome do projeto:** N-Rainhas
 - **Nome do grupo:** [nome do grupo]
-- **Repositório:** [https://github.com/...]
-- **Commit ou tag entregue:** [`v1.0`]
+- **Repositório:** https://github.com/flavioovatsug/paradigmas-trabalho-final
+- **Commit ou tag entregue:** `v1.0`
 - **Ponto de partida:** outro jogo conhecido
 - **Slides da apresentação oral:** não há
 
@@ -217,8 +217,9 @@ O Elm converte para `Maybe Int` com colunas a partir de 0 em
   ou diagonal (sem solução, 422), dica com tabuleiro completo (422),
   tabuleiro de tamanho inválido (422 do Pydantic), backend desligado (o Elm
   mostra "Sem conexão com o servidor").
-- Teste manual no navegador: pôr rainhas, ver conflitos em vermelho, usar
-  os quatro botões e trocar o tamanho.
+- Teste manual no navegador: pôr rainhas, ver conflitos em vermelho, alternar
+  exibição de ameaças, usar os quatro botões, abrir o modal tutorial e trocar o
+  tamanho.
 
 ## 9. Limitações e problemas conhecidos
 
@@ -233,7 +234,7 @@ O Elm converte para `Maybe Int` com colunas a partir de 0 em
 
 | Integrante | Principais contribuições |
 |------------|--------------------------|
-| Flávio Melo | [contribuições] |
+| [Nome]     | [contribuições] |
 | [Nome]     | [contribuições] |
 | [Nome]     | [contribuições] |
 
@@ -253,7 +254,8 @@ do Elm, documentação do daisyUI.
 
 | Ferramenta | Para que foi usada | Como o grupo verificou o resultado |
 |------------|--------------------|------------------------------------|
-| Claude (Anthropic) | Gerou a maior parte do código Prolog, Elm e Python e o rascunho deste relatório | Rodamos os testes (`make test`), testamos no navegador e revisamos cada arquivo para conseguir explicá-lo |
+| Claude (Anthropic) | Auxiliou na criação e revisão do código em Prolog, Elm e Python e na estruturação deste relatório | Rodamos os testes (`make test`), testamos no navegador e revisamos cada arquivo para conseguir explicá-lo |
+| Gemini (Google Antigravity) | Aprimorou a interface Elm/CSS (animações, responsividade, indicador de ameaças e modal tutorial), ajustou o Vite e revisou o relatório | Validamos com `elm-format --validate`, `npm run build`, testes `plunit` e teste manual no navegador |
 
 ## 12. Apresentação oral
 
@@ -262,10 +264,10 @@ do Elm, documentação do daisyUI.
 
 | Parte | Duração | Quem apresenta |
 |-------|:-------:|----------------|
-| Contexto e objetivo | 2 min | Flávio Melo |
+| Contexto e objetivo | 2 min | [Nome] |
 | Demonstração | 5 min | [Nome] |
 | Código Prolog | 3 min | [Nome] |
-| Código Elm | 3 min | Flávio Melo |
+| Código Elm | 3 min | [Nome] |
 | Limitações e aprendizados | 2 min | [Nome] |
 
 ## 13. Reflexão sobre os paradigmas
