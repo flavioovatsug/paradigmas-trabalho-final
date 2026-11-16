@@ -4,7 +4,7 @@
 
 | Nome completo | Matrícula | Turma (14h/16h) | Usuário GitHub |
 |---------------|-----------|-----------------|----------------|
-| Flávio Melo   | [000000]  | [14h]           | [@usuario]     |
+| Flávio Melo   | 211030602 | 16h             | [@flavioovatsug](https://github.com/flavioovatsug) |
 | [Nome]        | [000000]  | [16h]           | [@usuario]     |
 | [Nome]        | [000000]  | [14h]           | [@usuario]     |
 
@@ -39,7 +39,7 @@ na hora as rainhas em conflito.
 ```sh
 make install
 make dev
-# abrir http://localhost:5173
+# abrir http://localhost:5174
 ```
 
 **Testes:**

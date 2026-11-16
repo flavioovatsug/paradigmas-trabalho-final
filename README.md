@@ -20,10 +20,10 @@ frontend/src/                  backend/app/                backend/prolog/
 
 ```sh
 make install    # uma vez só
-make dev        # sobe backend (8000) e frontend (5173)
+make dev        # sobe backend (8000) e frontend (5174)
 ```
 
-Abra http://localhost:5173.
+Abra http://localhost:5174.
 
 ## Testes
 

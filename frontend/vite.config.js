@@ -6,11 +6,12 @@ import tailwindcss from "@tailwindcss/vite"; // gera o CSS do Tailwind/daisyUI
 export default defineConfig({
   plugins: [elm(), tailwindcss()],
   server: {
+    port: 5174,
     // Toda requisição para /api/... é repassada ao backend FastAPI. Assim o
     // frontend e o backend parecem estar no mesmo endereço, e não precisamos
     // configurar CORS.
     proxy: {
-      "/api": "http://localhost:8000",
+      "/api": "http://127.0.0.1:8000",
     },
   },
 });

@@ -15,7 +15,7 @@ dev:                ## sobe backend e frontend juntos (Ctrl+C encerra ambos)
 backend:            ## só o backend: http://localhost:8000/docs
 	cd backend && uv run fastapi dev app/main.py
 
-frontend:           ## só o frontend: http://localhost:5173
+frontend:           ## só o frontend: http://localhost:5174
 	cd frontend && npm run dev
 
 test: test-prolog test-backend
