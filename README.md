@@ -33,13 +33,17 @@ make test       # plunit (Prolog) + pytest (API)
 
 ## Como jogar
 
+- Escolha o tamanho do tabuleiro, de 4×4 a 8×8.
 - Clique numa casa para pôr uma rainha. Cada linha tem no máximo uma rainha:
   clicar em outra casa da mesma linha move a rainha; clicar nela de novo tira.
 - Rainhas que se atacam ficam vermelhas.
+- **Ameaças**: mostra, com pontinhos, as casas que já estão sob ataque.
 - **Dica**: o Prolog põe uma rainha correta na primeira linha vazia.
 - **Resolver**: o Prolog completa o tabuleiro mantendo as suas rainhas.
 - **Contar soluções**: quantas soluções existem com as rainhas já postas
   (92 no 8x8 vazio).
+- **Limpar**: tira todas as rainhas.
+- **?**: abre o tutorial com as regras. Ele também aparece na primeira visita.
 
 ## API
 
@@ -75,8 +79,26 @@ backend/tests/test_api.py        testes da API
 frontend/src/Rainhas.elm         tipo do tabuleiro e regras (puro)
 frontend/src/Api.elm             HTTP e JSON
 frontend/src/Main.elm            Model, Msg, update, view
+frontend/src/main.js             inicia o Elm e lembra se o tutorial já foi visto
 frontend/src/style.css           visual (Tailwind + daisyUI)
+docs/captura.png                 captura de tela usada no relatório
+RELATORIO.md                     relatório de entrega
 ```
+
+## Instalação no Ubuntu ou WSL
+
+O `janus-swi` é compilado na instalação, então precisa de um compilador e do
+SWI-Prolog instalado. No Ubuntu ou no WSL:
+
+```sh
+sudo add-apt-repository ppa:swi-prolog/stable
+sudo apt update
+sudo apt install swi-prolog build-essential python3-dev
+swipl --version     # confira que o swipl está no PATH
+```
+
+O `python3-dev` só é necessário se o `uv sync` reclamar de falta de
+cabeçalhos do Python (`Python.h`). Depois disso, rode `make install`.
 
 ## Problema comum
 
