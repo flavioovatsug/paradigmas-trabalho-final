@@ -4,16 +4,19 @@
 
 | Nome completo | Matrícula | Turma (14h/16h) | Usuário GitHub |
 |---------------|-----------|-----------------|----------------|
-| Flávio Melo   | 211030602 | 16h             | https://github.com/flavioovatsug |
-| [Nome]        | [000000]  | [16h]           | [@usuario]     |
-| [Nome]        | [000000]  | [14h]           | [@usuario]     |
+| Flavio Gustavo Araújo de Melo | 211030602 | [16h/18] | @flavioovatsug |
+| Gustavo França Boa Sorte | 211030774 | [16h/18] | [@usuario] |
+| Italo Bruno Avelino da Silva Melo | 190133813 | [14h/16h] | [@usuario] |
+| Amanda Gonçalves S Abreu | 211030925 | [16h/18h] | @Amandaaaaabreu |
+| Yan Werlley de Freitas Paulo | 211030649 | [16h/18h] | [@usuario] |
+| Taynara Gabrielle Vitorino | 211030264 | [16h/18h] | @taybalau |
+| Maykon Junio dos Santos Soares | 211030863 | [16h/18h] | @Maykonjuso |
 
 - **Nome do projeto:** N-Rainhas
-- **Nome do grupo:** [nome do grupo]
 - **Repositório:** https://github.com/flavioovatsug/paradigmas-trabalho-final
 - **Commit ou tag entregue:** `v1.0`
 - **Ponto de partida:** outro jogo conhecido
-- **Slides da apresentação oral:** não há
+- **Slides da apresentação oral:** (por fazer)
 
 ## 2. Resumo
 
@@ -234,9 +237,13 @@ O Elm converte para `Maybe Int` com colunas a partir de 0 em
 
 | Integrante | Principais contribuições |
 |------------|--------------------------|
-| [Nome]     | [contribuições] |
-| [Nome]     | [contribuições] |
-| [Nome]     | [contribuições] |
+| Flavio Gustavo Araújo de Melo | Escreveu `resolver/2` e `contar_solucoes/2` (`backend/prolog/rainhas.pl`), a API em Python (`backend/app/`), os testes pytest (`backend/tests/test_api.py`), o `frontend/src/main.js` e o visual do site (`frontend/src/style.css`). Organizou o repositório e ajudou a escrever o `README.md` este relatório. |
+| Gustavo França Boa Sorte | Escreveu o centro do Prolog, que descreve o que é uma solução: uma rainha por linha, cada uma numa coluna entre 1 e N, sem repetir coluna. Ele junta todas as regras do jogo num único lugar, sem se preocupar em como a resposta é encontrada (`restricoes/2`, em `backend/prolog/rainhas.pl`). |
+| Italo Bruno Avelino da Silva Melo | Escreveu as regras menores que o centro do Prolog usa: manter as rainhas que o jogador já colocou (`manter_rainha/2`) e impedir que duas rainhas fiquem na mesma diagonal, comparando a distância entre as linhas com a distância entre as colunas (`diagonais_livres/1` e `nao_ataca/3`). Fez também a dica: dado o tabuleiro atual, o Prolog indica em qual linha e coluna colocar a próxima rainha, ou avisa que o tabuleiro já está completo ou que não tem solução (`dica/2`). Todas em `backend/prolog/rainhas.pl`. Escreveu ainda os 11 testes automáticos do Prolog, que conferem, por exemplo, que o tabuleiro 4x4 tem 2 soluções e o 8x8 tem 92 (`backend/prolog/test_rainhas.pl`). |
+| Amanda Gonçalves S Abreu | Fez as regras do jogo no lado do navegador (`frontend/src/Rainhas.elm`): como o tabuleiro é guardado, como colocar ou tirar uma rainha ao clicar numa casa (`colocar` e `alternar`), como descobrir se uma rainha está sendo atacada (`ataca` e `emConflito`) e quando o jogador venceu (`venceu`). Assim, as rainhas em conflito ficam vermelhas na hora, sem esperar o servidor. |
+| Yan Werlley de Freitas Paulo | Montou o "cérebro" da tela (`frontend/src/Main.elm`): o que o programa guarda enquanto roda (`Model` e `Status`: tabuleiro, tamanho, mensagens), a lista de ações possíveis do jogador (`Msg`) e o que acontece a cada uma delas (`update`), como clicar numa casa, pedir dica, resolver, contar ou limpar. |
+| Taynara Gabrielle Vitorino | Desenhou a tela (`frontend/src/Main.elm`): o cabeçalho, os seletores de tamanho e de ameaças, o contador com a barra de progresso, o tabuleiro e suas casas, os botões, as mensagens de sucesso e de erro, e o fechamento do tutorial com a tecla Esc. Escreveu também as funções que apoiam a tela: os textos exibidos (`textoContagem`, `nomeCasa`, `letraColuna`) e as contas que alimentam o contador e o destaque das casas ameaçadas (`estaAtacada`, `totalRainhas` e `totalConflitos`, em `frontend/src/Rainhas.elm`). |
+| Maykon Junio dos Santos Soares | Fez a ligação entre o navegador e o servidor: escreveu o código que conversa com o servidor e interpreta as respostas, inclusive as mensagens de erro (`frontend/src/Api.elm`), e as funções que traduzem o tabuleiro para o formato do servidor e de volta (`paraLista` e `deLista`, em `frontend/src/Rainhas.elm`). Escreveu também o passo que dispara a busca pela resposta no Prolog, que procura valores que respeitem todas as regras declaradas (`solucao/2`, em `backend/prolog/rainhas.pl`). Fez ainda o tutorial que explica as regras ao jogador, com o passo a passo e o mini tabuleiro de exemplo (`viewModalAjuda`, `viewPasso` e `viewMiniTabuleiro`, em `frontend/src/Main.elm`). |
 
 ## 11. Fontes, código de terceiros e uso de IA
 
@@ -264,11 +271,13 @@ do Elm, documentação do daisyUI.
 
 | Parte | Duração | Quem apresenta |
 |-------|:-------:|----------------|
-| Contexto e objetivo | 2 min | [Nome] |
-| Demonstração | 5 min | [Nome] |
-| Código Prolog | 3 min | [Nome] |
-| Código Elm | 3 min | [Nome] |
-| Limitações e aprendizados | 2 min | [Nome] |
+| Contexto e objetivo | 2 min | Flavio Gustavo Araújo de Melo |
+| Demonstração | 3 min | Taynara Gabrielle Vitorino |
+| Prolog: regras e restrições | 2 min | Gustavo França Boa Sorte |
+| Prolog: regras auxiliares, dica e testes | 2 min | Italo Bruno Avelino da Silva Melo |
+| Elm: tipos e regras puras | 2 min | Amanda Gonçalves S Abreu |
+| Elm: Model, Msg e update | 2 min | Yan Werlley de Freitas Paulo |
+| Integração, busca e limitações | 2 min | Maykon Junio dos Santos Soares |
 
 ## 13. Reflexão sobre os paradigmas
 
