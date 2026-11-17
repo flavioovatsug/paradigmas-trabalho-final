@@ -4,13 +4,13 @@
 
 | Nome completo | Matrícula | Turma (14h/16h) | Usuário GitHub |
 |---------------|-----------|-----------------|----------------|
-| Flavio Gustavo Araújo de Melo | 211030602 | [16h/18] | @flavioovatsug |
-| Gustavo França Boa Sorte | 211030774 | [16h/18] | [@usuario] |
-| Italo Bruno Avelino da Silva Melo | 190133813 | [14h/16h] | [@usuario] |
-| Amanda Gonçalves S Abreu | 211030925 | [16h/18h] | @Amandaaaaabreu |
-| Yan Werlley de Freitas Paulo | 211030649 | [16h/18h] | [@usuario] |
-| Taynara Gabrielle Vitorino | 211030264 | [16h/18h] | @taybalau |
-| Maykon Junio dos Santos Soares | 211030863 | [16h/18h] | @Maykonjuso |
+| Flavio Gustavo Araújo de Melo | 211030602 | 16h | @flavioovatsug |
+| Gustavo França Boa Sorte | 211030774 | 16h | @gustavofbs |
+| Italo Bruno Avelino da Silva Melo | 190133813 | 14h | @ItaloBrunoM |
+| Amanda Gonçalves S Abreu | 211030925 | 16h | @Amandaaaaabreu |
+| Yan Werlley de Freitas Paulo | 211030649 | 16h | @YanWerlley |
+| Taynara Gabrielle Vitorino | 211030264 | 16h | @taybalau |
+| Maykon Junio dos Santos Soares | 211030863 | 16h | @maykonjuso |
 
 - **Nome do projeto:** N-Rainhas
 - **Repositório:** https://github.com/flavioovatsug/paradigmas-trabalho-final
