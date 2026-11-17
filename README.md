@@ -5,6 +5,8 @@ quebra-cabeça das N-Rainhas: pôr N rainhas num tabuleiro N x N sem que
 nenhuma ataque outra. O Prolog resolve, dá dicas e conta soluções; o Elm
 desenha a interface; o Python só faz a ponte entre os dois.
 
+![Captura de tela do jogo](docs/captura.png)
+
 ```
 Navegador (Elm) --HTTP/JSON--> FastAPI (Python) --janus--> SWI-Prolog
 frontend/src/                  backend/app/                backend/prolog/
